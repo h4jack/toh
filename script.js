@@ -73,3 +73,32 @@ document.querySelector(".menu-btn").addEventListener("click", () => {
                     onclick="show_help()">click here.</a>
             </p>`);
 });
+
+function isSolved() {
+    var children_length = tbox[2].children.length;
+    if (Mode.totalDisc + 1 != children_length) {
+        return;
+    }
+    for (let i = 1; i < children_length; i++) {
+        if (tbox[2].children[i].textContent != "" + i) {
+            let text = tbox[2].children[1].textContent;
+            if (text === "1D") {
+                continue;
+            }
+            console.log("Not Solved, Something Wrong happened. please restart, or inform the error.");
+            tbox[2].children[1].draggable = "";
+            showPopup("Error 😵‍💫", "There is Something Wrong in the Game, Please Start Again.");
+            return;
+        }
+    }
+
+    console.log("***Solved. (Level " + Mode.totalDisc + ")");
+    console.log("***Total Move Taken: " + Mode.totalMove);
+    tbox[2].children[1].draggable = "";
+    showPopup("Congratulations 🎉", `You have solved this tower of hanoi <b>Level ${Mode.totalDisc}</b> in <b>${Mode.totalMove}</b> Moves.
+    Click Start to Play Again.`);
+    if (Mode.totalDisc < 11) {
+        val[0].textContent = Mode.totalDisc + 1;
+        val[1].textContent = Mode.totalDisc + 1;
+    }
+}
