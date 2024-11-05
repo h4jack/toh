@@ -184,3 +184,26 @@ document.querySelector(".start-btn-ingame").addEventListener("click", () => {
 document.querySelector(".start.game").addEventListener("click", () => {
     startNew();
 });
+
+function show_help() {
+    const message_box = document.querySelector(".popup-message");
+    if (message_box.textContent[0] === "S") {
+        message_box.innerHTML = `Your goal is to drag the all the discs from Tower A to Tower C in the Same order shown in the Tower A. there is a intermediate help Tower(Tower B). you can take help of this tower to solve the TOH. <br>
+        <br>
+        if mobile device and drag functionality is not working, you can <b>click</b> the tower to select the top most element, and then <b>click</b> the tower where you want to move your element.
+        <br>if you don't want to touch the mouse, you can use the keyboard to move element and start,
+        <br> here is a guide to keyboard control:
+        <br><kbd>A<kbd>: Select Tower A  
+        <br><kbd>S<kbd>: Select Tower B 
+        <br><kbd>D<kbd>: Select Tower C
+        <br><kbd>Enter<kbd>: to Start new Game, with the selected no of disc 
+        <br><kbd>+<kbd>: to increase disc by 1.
+        <br><kbd>-<kbd>: to decrease disc by 1.
+        <br><kbd>H<kbd>: click Menu Button to open the menu/startbutton.
+        <br><kbd>R<kbd>: Run Automatic Solve using AI.
+        <br>now please Start the Game.
+        <br>I challenge you to complete all level from 1 to 11. hide this? <a class="click-help" onclick="show_help();">click here.</a>`
+        return;
+    }
+    message_box.innerHTML = `Select total Number of Disc to Start with. need help? <a class="click-help" onclick="show_help();">click here.`;
+}
