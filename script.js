@@ -222,3 +222,60 @@ function addFunctionality() {
         // disc.addEventListener('dragend', () => {});
     });
 }
+
+let selectedBox = null; // Keep track of the currently selected box
+
+// Event listeners for boxes
+tbox.forEach((box) => {
+    box.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    box.addEventListener('drop', (e) => {
+        const discId = e.dataTransfer.getData('text');
+        const disc = document.getElementById(discId);
+        moveDisc(null, box, disc)
+        addHotKey();
+    });
+
+    box.addEventListener("click", () => {
+        if (!clickable) {
+            showKey("Can't Click, Already Solved Start new Game.");
+            return;
+        }
+        if (selectedBox) {
+            selectedBox.children[1].style.border = `none`;
+            selectedBox.children[1].style.boxShadow = `none`;
+            if (selectedBox === box) {
+                selectedBox = null;
+                return;
+            }
+            if (selectedBox.children.length > 1) {
+                if (box.children.length == 1) {
+                    box.appendChild(selectedBox.children[1]);
+                    Mode.totalMove++;
+                } else {
+                    if (box.children[1].textContent > selectedBox.children[1].textContent) {
+                        box.insertBefore(selectedBox.children[1], box.children[1]);
+                        Mode.totalMove++;
+                    } else if (box.children.length > 1) {
+                        // Add border to the clicked box and set it as the selected box
+                        box.children[1].style.border = `2px solid green`;
+                        box.children[1].style.boxShadow = `0px 0px 10px green`;
+                        selectedBox = box;
+                        return;
+                    }
+                }
+            }
+            selectedBox = null;
+            addHotKey();
+            setDraggable();
+            isSolved();
+        } else if (box.children.length > 1) {
+            // Add border to the clicked box and set it as the selected box
+            box.children[1].style.border = `2px solid green`;
+            box.children[1].style.boxShadow = `0px 0px 10px green`;
+            selectedBox = box;
+        }
+    });
+});
