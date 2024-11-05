@@ -38,3 +38,15 @@ function addDiscs() {
         tbox[i].innerHTML = `<div class="bar"></div>`;
     }
 }
+
+function setDraggable() {
+    tbox.forEach(box => {
+        var children_length = box.children.length;
+        if (children_length > 1) {
+            box.children[1].draggable = "true";
+        }
+        for (let i = 2; i < children_length; i++) {
+            box.children[i].draggable = "";
+        }
+    });
+}
