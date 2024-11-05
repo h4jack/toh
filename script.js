@@ -157,3 +157,30 @@ document.querySelectorAll(".add.btn").forEach((btn) => {
         }
     });
 });
+
+document.querySelectorAll(".add.btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        if (Number(val[0].textContent) < Mode.max) {
+            val[0].textContent = Number(val[1].textContent) + 1;
+            val[1].textContent = Number(val[1].textContent) + 1;
+        }
+    });
+});
+
+document.querySelectorAll(".sub.btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        if (Number(val[0].textContent) > 1) {
+            val[0].textContent = Number(val[0].textContent) - 1;
+            val[1].textContent = Number(val[1].textContent) - 1;
+        }
+    });
+});
+
+document.querySelector(".start-btn-ingame").addEventListener("click", () => {
+    startNew();
+});
+
+
+document.querySelector(".start.game").addEventListener("click", () => {
+    startNew();
+});
