@@ -140,3 +140,20 @@ function moveDisc(from = null, to, disc = null) {
     setDraggable();
     isSolved();
 }
+
+function startNew() {
+    Mode.totalDisc = Number(val[0].textContent);
+    document.querySelector(".popup-input").style.display = "none";
+    clickable = 1;
+    addFunctionality();
+    addHotKey();
+}
+
+document.querySelectorAll(".add.btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        if (Number(val[0].textContent) < Mode.max) {
+            val[0].textContent = Number(val[1].textContent) + 1;
+            val[1].textContent = Number(val[1].textContent) + 1;
+        }
+    });
+});
