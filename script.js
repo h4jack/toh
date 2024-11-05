@@ -279,3 +279,26 @@ tbox.forEach((box) => {
         }
     });
 });
+
+
+let solveTimeInterval = 1;
+
+function solveTOH(n, TowerA, TowerC, TowerB, A, C, B) {
+    if (!n) {
+        return;
+    }
+    solveTOH(n - 1, TowerA, TowerB, TowerC, A, B, C);
+    setTimeout(() => {
+        console.log(`Move disc ${n} fron Rod Tower${A} to Tower${C}\n`)
+        TowerA.click();
+        TowerC.click();
+    }, 300 * solveTimeInterval)
+    solveTimeInterval++;
+    solveTOH(n - 1, TowerB, TowerC, TowerA, B, C, A);
+}
+
+function runAutoSolve() {
+    startNew();
+    solveTOH(Mode.totalDisc, tbox[0], tbox[2], tbox[1], "A", "C", "B");
+    solveTimeInterval = 1;
+}
