@@ -207,3 +207,18 @@ function show_help() {
     }
     message_box.innerHTML = `Select total Number of Disc to Start with. need help? <a class="click-help" onclick="show_help();">click here.`;
 }
+
+function addFunctionality() {
+    addDiscs();
+    addHotKey();
+    setDraggable();
+    const discs = document.querySelectorAll(".disc");
+    // Event listeners for draggable elements
+    discs.forEach((disc) => {
+        disc.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text', e.target.id);
+        });
+
+        // disc.addEventListener('dragend', () => {});
+    });
+}
