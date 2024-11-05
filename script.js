@@ -158,15 +158,6 @@ document.querySelectorAll(".add.btn").forEach((btn) => {
     });
 });
 
-document.querySelectorAll(".add.btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        if (Number(val[0].textContent) < Mode.max) {
-            val[0].textContent = Number(val[1].textContent) + 1;
-            val[1].textContent = Number(val[1].textContent) + 1;
-        }
-    });
-});
-
 document.querySelectorAll(".sub.btn").forEach((btn) => {
     btn.addEventListener("click", () => {
         if (Number(val[0].textContent) > 1) {
@@ -279,7 +270,6 @@ tbox.forEach((box) => {
         }
     });
 });
-
 
 let solveTimeInterval = 1;
 
