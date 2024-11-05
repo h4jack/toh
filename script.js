@@ -50,3 +50,26 @@ function setDraggable() {
         }
     });
 }
+
+function showPopup(title = null, message = null) {
+    clickable = 0;
+    if (title) {
+        document.querySelector(".popup-title").textContent = title;
+    } else {
+        document.querySelector(".popup-title").textContent = "Tower of Hanoi";
+    }
+    if (message) {
+        document.querySelector(".popup-message").innerHTML = message;
+    } else {
+        document.querySelector(".popup-message").innerHTML = `Select total Number of Disc to Start with. need help? <a class="click - help"
+        onclick = "show_help()" > click here.</a > `;
+    }
+    document.querySelector(".popup-input").style.display = "flex";
+    Mode.totalMove = 0;
+}
+
+document.querySelector(".menu-btn").addEventListener("click", () => {
+    showPopup("Tower of Hanoi", `<p class="popup-message">Select total Number of Disc to Start with. need help? <a class="click-help"
+                    onclick="show_help()">click here.</a>
+            </p>`);
+});
