@@ -302,3 +302,44 @@ function runAutoSolve() {
     solveTOH(Mode.totalDisc, tbox[0], tbox[2], tbox[1], "A", "C", "B");
     solveTimeInterval = 1;
 }
+
+document.addEventListener("keypress", (key) => {
+    showKey(key.key)
+    if (key.key.toLowerCase() === "a") {
+        tbox[0].click();
+    } else if (key.key.toLowerCase() === "s") {
+        tbox[1].click();
+    } else if (key.key.toLowerCase() === "d") {
+        tbox[2].click();
+    } else if (key.key.toLowerCase() === "h") {
+        document.querySelector(".popup-input").style.display = "flex";
+        show_help();
+    } else if (key.key.toLowerCase() === "r") {
+        runAutoSolve();
+    } else if (key.key.toLowerCase() === "enter") {
+        startNew();
+    } if (key.key.toLowerCase() === "+" || key.key.toLowerCase() === "=") {
+        if (Number(val[0].textContent) < Mode.max) {
+            val[0].textContent = Number(val[1].textContent) + 1;
+            val[1].textContent = Number(val[1].textContent) + 1;
+        }
+    } else if (key.key.toLowerCase() === "-" || key.key.toLowerCase() === "_") {
+        if (Number(val[0].textContent) > 1) {
+            val[0].textContent = Number(val[0].textContent) - 1;
+            val[1].textContent = Number(val[1].textContent) - 1;
+        }
+    } else {
+    }
+});
+
+function showKey(key) {
+    const popupElement = document.createElement("div");
+    popupElement.classList.add("key-pressed-popup");
+    const popupElementP = document.createElement("p");
+    popupElementP.textContent = key;
+    popupElement.appendChild(popupElementP);
+    document.body.appendChild(popupElement);
+    setTimeout(() => {
+        document.querySelector(".key-pressed-popup").remove();
+    }, 1000);
+}
