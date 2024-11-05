@@ -114,3 +114,29 @@ function addHotKey() {
         }
     });
 }
+
+function moveDisc(from = null, to, disc = null) {
+    if (disc) {
+        if (to.children.length == 1) {
+            to.appendChild(disc);
+            Mode.totalMove++;
+        } else {
+            if (to.children[1].textContent > disc.textContent) {
+                to.insertBefore(disc, to.children[1]);
+                Mode.totalMove++;
+            }
+        }
+    } else if (from.children.length > 1) {
+        if (to.children.length == 1) {
+            to.appendChild(from.children[1]);
+            Mode.totalMove++;
+        } else {
+            if (to.children[1].textContent > from.children[1].textContent) {
+                to.insertBefore(from.children[1], to.children[1]);
+                Mode.totalMove++;
+            }
+        }
+    }
+    setDraggable();
+    isSolved();
+}
