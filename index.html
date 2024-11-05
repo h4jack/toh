@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tower of Hanoi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .header,
+        .container,
+        .tower-box,
+        .tower-title,
+        .tower-title .title,
+        .tower-box .disc {
+            transition: width 0.5s ease-out, background 0.5s ease-in, color 0.5s ease-in-out;
+        }
+
+        .container {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+
+        .header {
+            height: 50px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            background-color: #ffffff10;
+            justify-content: space-between;
+        }
+
+        .menu-btn {
+            height: 50px;
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            font-size: 25px;
+            font-weight: bold;
+            color: white;
+            border-top-right-radius: 10px;
+            text-shadow: 0px 0px 5px white;
+        }
+
+        .menu-btn:hover {
+            filter: drop-shadow(0px 0px 10px white);
+        }
+
+        .menu-btn .bar {
+            height: 3px;
+            width: 60%;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .logo {
+            height: 30px;
+            width: auto;
+            padding: 0px;
+            margin: 0px;
+            padding-left: 10px;
+            font-size: 25px;
+            color: white;
+            text-shadow: 0px 0px 10px green;
+            cursor: pointer;
+            text-align: center;
+            align-content: center;
+        }
+
+        @media (max-width: 850px) {
+
+            .header,
+            .container,
+            .tower-title {
+                width: 500px;
+            }
+
+            .tower-box,
+            .tower-title .title {
+                width: 100px;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            .header,
+            .container,
+            .tower-title {
+                width: 400px;
+            }
+
+            .tower-box,
+            .tower-title .title {
+                width: 80px;
+            }
+
+            .tower-title .title {
+                font-size: 20px;
+            }
+
+            .logo {
+                font-size: 14px;
+            }
+
+            .start-btn-ingame {
+                font-size: 20px;
+                padding: 10px 5px;
+            }
+        }
+
+        @media (max-width: 490px) {
+            .popup-input .input-box {
+                width: 380px;
+                margin: 0px;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 430px) {
+
+            .header,
+            .container,
+            .tower-title {
+                width: 100vw;
+                background-color: transparent;
+            }
+
+            .tower-box,
+            .tower-title .title {
+                width: 100px;
+                padding: 10px 0px;
+            }
+
+            .tower-box .disc {
+                background-color: rgb(40, 53, 83);
+            }
+
+            .tower-title .title {
+                font-size: 15px;
+            }
+
+            .popup-input .input-box {
+                width: 350px;
+            }
+
+            .input-box-ingame.input {
+                display: none;
+            }
+
+            .header {
+                top: 0;
+                position: fixed;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .popup-input .input-box {
+                width: 300px;
+            }
+
+            .popup-message {
+                padding: 0 20px;
+            }
+
+        }
+
+        @media (max-width: 350px) {
+
+            .tower-box,
+            .tower-title .title {
+                width: 70px;
+            }
+
+            .popup-input .input-box {
+                width: 250px;
+                margin: 40px;
+            }
+
+            .tower-title .title {
+                font-size: 15px;
+            }
+        }
+
+        .key-pressed-popup {
+            height: auto;
+            bottom: 50px;
+            width: auto;
+            max-width: 80%;
+            padding: 0px 20px;
+            background-color: rgb(10, 23, 53);
+            position: fixed;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: white;
+            animation: popup 0.5s ease;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgb(40, 53, 83);
+            animation: popup 0.5s ease;
+        }
+
+        @keyframes popup {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            100% {
+                opacity: 100%;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1 class="logo" onclick="runAutoSolve()">
+            TOWER OF HANOI
+        </h1>
+        <div class="input-box-ingame input">
+            <div class="sub btn">−</div>
+            <div class="total-disc-input value">1</div>
+            <div class="add btn">+</div>
+            <button class="start-btn-ingame">
+                Start
+            </button>
+        </div>
+        <div class="options">
+            <div class="menu-btn">
+                ?
+            </div>
+        </div>
+    </div>
+    <div class="popup-input">
+        <div class="input-box">
+            <h1 class="popup-title">Tower of Hanoi</h1>
+            <p class="popup-message">Select total Number of Disc to Start with. need help? <a class="click-help"
+                    onclick="show_help()">click here.</a>
+            </p>
+            <div class="input">
+                <div class="sub btn">−</div>
+                <div class="total-disc-input value">1</div>
+                <div class="add btn">+</div>
+            </div>
+            <div class="start game">Start</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="tower-box one">
+            <div class="bar"></div>
+        </div>
+        <div class="tower-box two">
+            <div class="bar"></div>
+        </div>
+        <div class="tower-box three">
+            <div class="bar"></div>
+        </div>
+        <div class="tower-title">
+            <div class="title one">Tower A</div>
+            <div class="title two">Tower B</div>
+            <div class="title three">Tower C</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
