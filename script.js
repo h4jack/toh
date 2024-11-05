@@ -102,3 +102,15 @@ function isSolved() {
         val[1].textContent = Mode.totalDisc + 1;
     }
 }
+
+function addHotKey() {
+    document.querySelectorAll(".hot-key").forEach(key => {
+        key.remove();
+    });
+    tbox.forEach((box, index) => {
+        let x = ['A', 'S', 'D']
+        if (box.children.length > 1) {
+            box.children[1].innerHTML += `<div class="hot-key">${x[index]}</div>`;
+        }
+    });
+}
